@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Proxy Search Engine</title>
+</head>
+<body>
+<h1>Proxy Search Engine</h1>
+<form id="searchForm">
+<input type="text" id="query" placeholder="Search..." required />
+<button type="submit">Search</button>
+</form>
+<div id="results"></div>
+<script>
+document.getElementById("searchForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const q = document.getElementById("query").value;
+  const res = await fetch(`/search?q=${encodeURIComponent(q)}`);
+  const html = await res.text();
+  document.getElementById("results").innerHTML = html;
+});
+</script>
+</body>
+</html>
